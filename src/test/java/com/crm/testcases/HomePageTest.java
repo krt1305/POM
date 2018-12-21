@@ -8,12 +8,12 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class LoginPageTest extends Base {
+public class HomePageTest extends Base {
 
     LoginPage loginPage;
     HomePage homePage;
-    public LoginPageTest() {
 
+    public HomePageTest() {
         super();
     }
 
@@ -22,27 +22,23 @@ public class LoginPageTest extends Base {
     {
         openBrowser();
         loginPage=new LoginPage();
+        homePage= loginPage.login(prop.getProperty("username"));
 
 
     }
-
-  /*  @Test
-    public void loginPageTitleTest()
-    {
-        String actualTitle=loginPage.validateLoginPageTitle();
-        Assert.assertEquals(actualTitle,"#1 Free CRM software in the cloud for sales and service");
-    }
-    */
 
     @Test
-    public void loginTest()
+    public void verifyHomePageTitle()
     {
-        homePage=loginPage.login(prop.getProperty("username"));
+
+        String homePageTitle=homePage.verifyHomePageTitle();
+        Assert.assertEquals(homePageTitle,"CRMPRO");
+
     }
+
     @AfterMethod
     public void tearDown()
     {
         driver.quit();
     }
-
 }
